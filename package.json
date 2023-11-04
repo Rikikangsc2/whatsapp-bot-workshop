@@ -1,5 +1,5 @@
 {
-    "name": "rtxzy",
+    "name": "Alica",
     "version": "6.3.1",
     "description": "Customizable WhatsApp Bot",
     "depecrated": false,
@@ -23,7 +23,7 @@
         "Games-wabot",
         "wabot-aq",
         "whiskeysockets",
-        "botcahx",
+        "alicia",
         "baileys"
     ],
     "homepage": "https://github.com/BOTCAHX/RTXZY-MD",
