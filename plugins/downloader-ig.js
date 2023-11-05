@@ -1,11 +1,11 @@
 const fetch = require('node-fetch')
 
 let handler = async (m, { conn, args, usedPrefix, command }) => {
-    if (!args[0]) throw `*Contoh:* ${usedPrefix}${command} https://www.instagram.com/p/ByxKbUSnubS/?utm_source=ig_web_copy_link`
+    if (!args[0]) throw `Mana Link nya`
 
     try {
-await m.reply(wait)
-        const api = await fetch(`https://api.azz.biz.id/api/Instagram?url=${args[0]}&key=alok`)
+        await m.reply(wait)
+        const api = await fetch(`https://api-miftah.xyz/api/downloader/instagram-s2?api_key=${miftah}&target_url=${args[0]}`)
         const res = await api.json()
 
         for (let i of res.data) {

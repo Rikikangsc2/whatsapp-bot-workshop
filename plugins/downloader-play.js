@@ -5,7 +5,7 @@ const handler = async (m, { conn, text }) => {
     return m.reply("Masukkan judul video YouTube yang ingin Anda cari.");
   }
 
-  const apiUrl = `https://api.azz.biz.id/api/play?q=${text}&key=alok`;
+  const apiUrl = `https://api.azz.biz.id/api/play?q=${text}&key=${azz}`;
 
   try {
     const response = await axios.get(apiUrl);

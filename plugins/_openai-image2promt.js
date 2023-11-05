@@ -14,7 +14,7 @@ let handler = async (m) => {
 await m.reply(wait)
   
   // Construct the API URL
-  const apiUrl = `https://api.azz.biz.id/api/image2promt?url=${encodeURIComponent(link)}&key=alok`;
+  const apiUrl = `https://api.azz.biz.id/api/image2promt?url=${encodeURIComponent(link)}&key=${azz}`;
   
   // Send a GET request to the API
   try {

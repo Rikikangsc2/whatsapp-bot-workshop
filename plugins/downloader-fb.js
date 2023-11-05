@@ -1,9 +1,9 @@
 const fetch = require('node-fetch');
 let handler = async (m, { conn, args, usedPrefix, command }) => {  
-        if (!args[0]) throw `Gunakan contoh ${usedPrefix}${command} https://fb.watch/mcx9K6cb6t/?mibextid=8103lRmnirLUhozF`;
+        if (!args[0]) throw `Gunakan contoh ${usedPrefix}${command} https://www.facebook.com/100010929794713/posts/1885825845125057/`;
         try {
 await m.reply(wait)
-        const res = await fetch(`https://api.azz.biz.id/api/facebookdl?url=${args[0]}&key=alok`);
+        const res = await fetch(`https://api.azz.biz.id/api/facebookdl?url=${args[0]}&key=${azz}`);
         const json = await res.json();
         let urls = json.result;
         if (!Array.isArray(urls)) {

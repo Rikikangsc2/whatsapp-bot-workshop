@@ -10,7 +10,7 @@ const handler = async (m, {
     try {
         conn.sendPresenceUpdate("recording", m.chat);
         const query = m.quoted && m.quoted.text ? `pesan sebelumnya: "${m.quoted.text}"\n\n${text}` : `${text}`;
-        const apiUrl = `https://api.azz.biz.id/api/alicia?q=${encodeURIComponent(query)}&user=${m.chat}&key=alok`;
+        const apiUrl = `https://api.azz.biz.id/api/alicia?q=${encodeURIComponent(query)}&user=${m.chat}&key=${azz}`;
 
         const response = await fetch(apiUrl);
         const data = await response.json();
