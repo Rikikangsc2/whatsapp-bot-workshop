@@ -15,19 +15,9 @@ global.author = 'Bot WhatsApp'
 global.maxwarn = '2' // Peringatan maksimum
 
 //INI WAJIB DI ISI!//
-global.btc = '-' 
-//Daftar terlebih dahulu https://api.botcahx.live
+global.azz = 'your_key' 
+global.miftah = 'your_key'
 
-//INI OPTIONAL BOLEH DI ISI BOLEH JUGA ENGGA//
-global.lann = '-'
-//Daftar https://api.betabotz.org 
-
-global.APIs = {   
-  btc: 'https://api.botcahx.live'
-}
-global.APIKeys = { 
-  'https://api.botcahx.live': 'APIKEY' 
-}
 
 let fs = require('fs')
 let chalk = require('chalk')
