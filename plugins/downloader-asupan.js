@@ -1,33 +1,32 @@
-let handler = async(m, { conn }) => {
+let handler = async (m, { conn }) => {
   const asupan = [
-    `https://api.botcahx.live/api/asupan/rikagusriani?apikey=${btc}`,
-    `https://api.botcahx.live/api/asupan/santuy?apikey=${btc}`,
-    `https://api.botcahx.live/api/asupan/ukhty?apikey=${btc}`,
-    `https://api.botcahx.live/api/asupan/bocil?apikey=${btc}`,
-    `https://api.botcahx.live/api/asupan/gheayubi?apikey=${btc}`,
-    `https://api.botcahx.live/api/asupan/natajadeh?apikey=${btc}`,
-    `https://api.botcahx.live/api/asupan/euni?apikey=${btc}`,
-    `https://api.botcahx.live/api/asupan/douyin?apikey=${btc}`
-  ]
+    "https://api.akuari.my.id/asupan/bocil",
+    "https://api.akuari.my.id/asupan/cecan",
+    "https://api.akuari.my.id/asupan/ukhty",
+  ];
   try {
-    const url = pickRandom(asupan);
-    await conn.sendFile(m.chat, url, 'asupan.mp4', '', m);
+    const randomApiIndex = Math.floor(Math.random() * asupan.length);
+    const apiUrl = asupan[randomApiIndex];
+    const response = await fetch(apiUrl);
+    const data = await response.json();
+
+    if (data && data.respon) {
+      await conn.sendFile(m.chat, data.respon, "asupan.mp4", "", m);
+    } else {
+      m.reply("Maaf, video asupan tidak ditemukan");
+    }
   } catch (e) {
     console.log(e);
-    m.reply('Maaf, video asupan tidak ditemukan');
+    m.reply("Maaf, terjadi kesalahan saat mengambil video asupan");
   }
-}
+};
 
-handler.help = ['asupan']
-handler.tags = ['downloader']
-handler.command = /^asupan$/i
-handler.owner = false
-handler.premium = false
-handler.group = false
-handler.private = false
+handler.help = ["asupan"];
+handler.tags = ["downloader"];
+handler.command = /^asupan$/i;
+handler.owner = false;
+handler.premium = false;
+handler.group = false;
+handler.private = false;
 
-function pickRandom(list) {
-  return list[Math.floor(list.length * Math.random())]
-}
-
-module.exports = handler
+module.exports = handler;

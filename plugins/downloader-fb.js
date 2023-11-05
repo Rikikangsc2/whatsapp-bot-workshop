@@ -1,13 +1,15 @@
 const fetch = require('node-fetch');
 let handler = async (m, { conn, args, usedPrefix, command }) => {  
-        if (!args[0]) throw `Gunakan contoh ${usedPrefix}${command} https://www.facebook.com/100010929794713/posts/1885825845125057/`;
-        try {
-await m.reply(wait)
+    if (!args[0]) {
+        return conn.reply(m.chat, `Gunakan contoh ${usedPrefix}${command} https://www.facebook.com/100010929794713/posts/1885825845125057/`, m);
+    }
+    try {
+        await m.reply(wait)
         const res = await fetch(`https://api.azz.biz.id/api/facebookdl?url=${args[0]}&key=${azz}`);
         const json = await res.json();
         let urls = json.result;
         if (!Array.isArray(urls)) {
-            throw `Tidak dapat mendapatkan URL video dari tautan yang diberikan`;
+            return conn.reply(m.chat, `Tidak dapat mendapatkan URL video dari tautan yang diberikan`, m);
         }
         for (let url of urls) {
             if (url.quality == "720p") {
@@ -17,7 +19,7 @@ await m.reply(wait)
         }
     } catch (error) {
         console.log(error);
-        throw 'Terjadi kesalahan pada saat melakukan proses download';
+        conn.reply(m.chat, 'Terjadi kesalahan pada saat melakukan proses download', m);
     }
 }
 handler.help = ['facebook'].map(v => v + ' <url>');

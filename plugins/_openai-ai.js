@@ -5,7 +5,9 @@ const handler = async (m, {
     usedPrefix,
     command
 }) => {
-    if (!text) throw `Masukkan pertanyaan!\n\n*Contoh:* Siapa presiden Indonesia? `
+    if (!text) {
+        return m.reply(`Masukkan pertanyaan!\n\n*Contoh:* Siapa presiden Indonesia? `);
+    }
 
     try {
         conn.sendPresenceUpdate("recording", m.chat);
@@ -18,11 +20,11 @@ const handler = async (m, {
         if (data && data.respon) {
             await m.reply(data.respon);
         } else {
-            throw "Tidak ada respons yang valid dari API.";
+            return m.reply("Tidak ada respons yang valid dari API.");
         }
     } catch (err) {
         console.error(err);
-        throw "Terjadi kesalahan dalam menjawab pertanyaan";
+        return m.reply("Terjadi kesalahan dalam menjawab pertanyaan");
     }
 }
 
