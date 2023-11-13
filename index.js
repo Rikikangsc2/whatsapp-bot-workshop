@@ -1,10 +1,11 @@
-const cluster = require("cluster");
-const { spawn } = require("child_process");
-const path = require("path");
-const fs = require("fs");
-const os = require('os');
+const cluster = require('cluster');
+const { spawn } = require('child_process');
+const path = require('path');
+const fs = require('fs');
+const os = require('node:os');
 const express = require('express');
 const app = express();
+
 const port = process.env.PORT || 8080;
 
 console.log('\x1b[33m%s\x1b[0m', `🌐 Port ${port} is open`);
@@ -66,12 +67,13 @@ function start(file) {
   p.on("exit", (code) => {
     isRunning = false;
     console.error('\x1b[31m%s\x1b[0m', `Exited with code: ${code}`);
+    start('main.js');
 
     if (code === 0) return;
 
     fs.watchFile(args[0], () => {
       fs.unwatchFile(args[0]);
-	  console.error('\x1b[31m%s\x1b[0m', `File ${args[0]} has been modified. Script will restart...`);
+      console.error('\x1b[31m%s\x1b[0m', `File ${args[0]} has been modified. Script will restart...`);
       start("main.js");
     });
   });
@@ -111,6 +113,12 @@ function start(file) {
 }
 
 start("main.js");
+
+const tmpDir = './tmp';
+  if (!fs.existsSync(tmpDir)) {
+    fs.mkdirSync(tmpDir);
+    console.log('\x1b[33m%s\x1b[0m', `📁 Created directory ${tmpDir}`);
+}
 
 process.on('unhandledRejection', (reason) => {
   console.error('\x1b[31m%s\x1b[0m', `Unhandled promise rejection: ${reason}`);

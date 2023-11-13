@@ -1,17 +1,12 @@
+const fetch = require('node-fetch');
 let handler = async (m, { conn }) => {
-  const asupan = [
-    "https://api.akuari.my.id/asupan/bocil",
-    "https://api.akuari.my.id/asupan/cecan",
-    "https://api.akuari.my.id/asupan/ukhty",
-  ];
   try {
-    const randomApiIndex = Math.floor(Math.random() * asupan.length);
-    const apiUrl = asupan[randomApiIndex];
+    const apiUrl = "https://api.miftahganzz.my.id/api/random/asupanrandom?type=video&apikey=global";
     const response = await fetch(apiUrl);
-    const data = await response.json();
+    const buffer = await response.buffer(); // Convert the response to a buffer
 
-    if (data && data.respon) {
-      await conn.sendFile(m.chat, data.respon, "asupan.mp4", "", m);
+    if (buffer) {
+      await conn.sendFile(m.chat, buffer, null, "*Done*",m);
     } else {
       m.reply("Maaf, video asupan tidak ditemukan");
     }

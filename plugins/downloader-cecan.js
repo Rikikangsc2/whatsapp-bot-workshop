@@ -1,19 +1,21 @@
 let fetch = require('node-fetch')
 
 let handler = async (m, { conn, command }) => {
-    let api1 = `https://api.botcahx.live/api/cecan/${command}?apikey=${btc}`
-    let api2 = `https://api.betabotz.org/api/cecan/${command}?apikey=${lann}`
-    let buffer = await fetch(api1)
+    let apiUrl = `https://aemt.me/${command}`
+    let buffer = await fetch(apiUrl)
         .then(res => res.buffer())
         .catch(async (err) => {
-            console.log(`API 1 failed with error: ${err}. Trying API 2...`)
-            buffer = await fetch(api2).then(res => res.buffer())
-            return buffer
+            console.log(`API request failed with error: ${err}`)
+            // Handle the error as needed
         })
-    conn.sendFile(m.chat, buffer, 'hasil.jpg', `Random ${command}`, m)
+    if (buffer) {
+        conn.sendFile(m.chat, buffer, 'hasil.jpg', `Random ${command}`, m)
+    } else {
+m.reply('Ups terjadi error');
+    }
 }
 
-handler.command = ['china','vietnam','thailand','indonesia','korea','japan','malaysia','justinaxie','jeni','jiso','ryujin','rose','hijaber']
+handler.help = handler.command = ['china','vietnam','thailand','indonesia','korea','japan','malaysia']
 handler.tags = ['downloader']
 
 module.exports = handler

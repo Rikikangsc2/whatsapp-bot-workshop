@@ -1,33 +1,40 @@
 let handler = (m, { usedPrefix, command, text }) => {
-    if (!text) throw `contoh:\n${usedPrefix + command} 2002 02 25`
+    if (!text) {
+        m.reply(`contoh:\n${usedPrefix + command} 2002 02 25`);
+        return;
+    }
 
-    const date = new Date(text)
-    if (date == 'Invalid Date') throw date
-    const d = new Date()
-    const [tahun, bulan, tanggal] = [d.getFullYear(), d.getMonth() + 1, d.getDate()]
-    const birth = [date.getFullYear(), date.getMonth() + 1, date.getDate()]
-    
-    const zodiac = getZodiac(birth[1], birth[2])
-    const ageD = new Date(d - date)
-    const age = ageD.getFullYear() - new Date(1970, 0, 1).getFullYear()
+    const date = new Date(text);
+    if (date == 'Invalid Date') {
+        m.reply(date);
+        return;
+    }
 
-    const birthday = [tahun + (+ new Date(1970, bulan - 1, tanggal) > + new Date(1970, birth[1] - 1, birth[2])), ...birth.slice(1)]
-    const cekusia = bulan === birth[1] && tanggal === birth[2] ? `Selamat ulang tahun yang ke-${age} 🥳` : age
+    const d = new Date();
+    const [tahun, bulan, tanggal] = [d.getFullYear(), d.getMonth() + 1, d.getDate()];
+    const birth = [date.getFullYear(), date.getMonth() + 1, date.getDate()];
+
+    const zodiac = getZodiac(birth[1], birth[2]);
+    const ageD = new Date(d - date);
+    const age = ageD.getFullYear() - new Date(1970, 0, 1).getFullYear();
+
+    const birthday = [tahun + (+ new Date(1970, bulan - 1, tanggal) > + new Date(1970, birth[1] - 1, birth[2])), ...birth.slice(1)];
+    const cekusia = bulan === birth[1] && tanggal === birth[2] ? `Selamat ulang tahun yang ke-${age} 🥳` : age;
 
     const teks = `
 Lahir : ${birth.join('-')}
 Ultah Mendatang : ${birthday.join('-')}
 Usia : ${cekusia}
 Zodiak : ${zodiac}
-`.trim()
-    m.reply(teks)
+`.trim();
+    m.reply(teks);
 }
-handler.help = ['zodiac *2002 02 25*']
-handler.tags = ['tools', 'internet', 'fun']
 
-handler.command = /^zodia[kc]$/i
+handler.help = ['zodiac'];
+handler.tags = ['tools', 'internet', 'fun'];
+handler.command = /^zodia[kc]$/i;
 
-module.exports = handler
+module.exports = handler;
 
 const zodiak = [
     ["Capricorn", new Date(1970, 0, 1)],
@@ -43,9 +50,9 @@ const zodiak = [
     ["Scorpio", new Date(1970, 9, 23)],
     ["Sagittarius", new Date(1970, 10, 22)],
     ["Capricorn", new Date(1970, 11, 22)]
-].reverse()
+].reverse();
 
 function getZodiac(month, day) {
-    let d = new Date(1970, month - 1, day)
-    return zodiak.find(([_,_d]) => d >= _d)[0]
+    let d = new Date(1970, month - 1, day);
+    return zodiak.find(([_,_d]) => d >= _d)[0];
 }
